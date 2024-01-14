@@ -1,0 +1,10 @@
+<phpunit colors="true" bootstrap="vendor/autoload.php">
+	<testsuites>
+		<testsuite name="Feature">
+			<directory suffix="Test.php">./tests/Feature</directory>
+		</testsuite>
+	</testsuites>
+	<php>
+		<env name="APP_KEY" value="base64:+2tZlQest4U7k66qggDMnEP4fYGP6n8qKO5Yl4GuXwE=" />
+	</php>
+</phpunit>
