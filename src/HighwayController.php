@@ -177,7 +177,7 @@ abstract class HighwayController extends Controller
 
         $route_class = 'App\Routing\\' . $contextName;
 
-        return $route_class::view('pages.' . strtolower($contextName) . '.' . $routeName, $this->_getAttachedData());
+        return $route_class::view('pages.' . $routeName, $this->_getAttachedData());
     }
 
     public static function get_class_name(mixed $class = null)
