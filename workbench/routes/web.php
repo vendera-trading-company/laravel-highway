@@ -16,5 +16,5 @@ use Workbench\App\Routing\Web;
 |
 */
 
-Web::post(Calculator::class, 'multiply', 'multiply');
+Web::get(Calculator::class, 'multiply', 'multiply');
 Api::post(Calculator::class, 'multiply', 'multiply');

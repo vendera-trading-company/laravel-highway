@@ -14,10 +14,10 @@ class CalculatorMultiplyTest extends TestCase
 
         $result = $number * $multiplier;
 
-        $response = $this->post(route('web.calculator.multiply'), [
+        $response = $this->get(route('web.calculator.multiply', [
             'number' => $number,
             'multiplier' => $multiplier
-        ]);
+        ]));
 
         $response->assertOk();
 
