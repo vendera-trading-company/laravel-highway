@@ -4,8 +4,9 @@ namespace VenderaTradingCompany\LaravelHighway;
 
 use VenderaTradingCompany\PHPActions\Response;
 use VenderaTradingCompany\PHPActions\Action;
+use Illuminate\Routing\Controller;
 
-abstract class HighwayController
+abstract class HighwayController extends Controller
 {
     private array $attachedData = [];
 
