@@ -1,6 +1,6 @@
 <?php
 
-namespace Workbench\App\Controllers\Web;
+namespace Workbench\App\Http\Controllers\Api;
 
 use VenderaTradingCompany\LaravelHighway\HighwayController;
 use Workbench\App\Entities\Calculator;
