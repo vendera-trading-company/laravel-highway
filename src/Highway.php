@@ -79,12 +79,12 @@ abstract class Highway
 
         $context_name = static::get_class_name();
 
-        $class = $namespace . '\\Controllers\\' .$id . '\\'. $id . 'Controller';
+        $class = $namespace . '\\Controllers\\' .$context_name . '\\'. $id . 'Controller';
 
         if (!method_exists($class, $methodName)) {
             if ($routeType == 'get') {
                 Route::$routeType($path, function () use ($methodName, $namespace, $id, $routeName, $entity, $context_name) {
-                    return App::call($namespace . '\\Controllers\\' .$id . '\\'.  $id . 'Controller@view', [
+                    return App::call($namespace . '\\Controllers\\' .$context_name . '\\'.  $id . 'Controller@view', [
                         'entity' => $entity,
                         'type' => $methodName,
                         'namespace' => $namespace,
@@ -94,7 +94,7 @@ abstract class Highway
                 })->name($routeName);
             } else {
                 Route::$routeType($path, function () use ($methodName, $namespace, $id, $routeName, $entity, $context_name) {
-                    return App::call($namespace . '\\Controllers\\' .$id . '\\'.  $id . 'Controller@action', [
+                    return App::call($namespace . '\\Controllers\\' .$context_name . '\\'.  $id . 'Controller@action', [
                         'entity' => $entity,
                         'type' => $methodName,
                         'namespace' => $namespace,
@@ -104,7 +104,7 @@ abstract class Highway
                 })->name($routeName);
             }
         } else {
-            Route::$routeType($path, $namespace . '\\Controllers\\' . $id . '\\'. $id . 'Controller@' . $methodName)->name($routeName);
+            Route::$routeType($path, $namespace . '\\Controllers\\' . $context_name . '\\'. $id . 'Controller@' . $methodName)->name($routeName);
         }
     }
 
