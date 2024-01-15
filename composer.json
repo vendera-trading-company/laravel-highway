@@ -24,6 +24,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
+        "php": "^8.2",
         "vendera-trading-company/php-actions": "^1.0.1"
     },
     "require-dev": {
