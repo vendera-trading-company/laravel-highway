@@ -40,6 +40,11 @@ abstract class Highway
         self::any($model, '{id}/destroy', 'destroy');
     }
 
+    public static function raw($page, string $path = '/', string $method = 'show')
+    {
+        self::_method($page, $path, $method, 'get', true);
+    }
+
     public static function file($page, string $path = '/', string $method = 'show')
     {
         self::_method($page, $path, $method, 'get');
@@ -65,11 +70,11 @@ abstract class Highway
         return static::$namespace;
     }
 
-    private static function _method(mixed $entity, string $path, mixed $method, mixed $routeType = 'get')
+    private static function _method(mixed $entity, string $path, mixed $method, mixed $routeType = 'get', $rawPath = false)
     {
         $id = static::get_class_name($entity);
 
-        $path = self::_path($id, $path);
+        $path = $rawPath ? $path : self::_path($id, $path);
 
         $routeName = self::_routeName(strtolower($id), $method);
 
