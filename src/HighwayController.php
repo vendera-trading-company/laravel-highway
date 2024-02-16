@@ -61,17 +61,17 @@ abstract class HighwayController extends Controller
             return null;
         }
 
-        $actionData = Action::run($action_class);
+        $response = Action::build($action_class)->run();
 
-        if (!empty($actionData->getData())) {
-            if (is_array($actionData->getData())) {
-                foreach ($actionData->getData() as $key => $value) {
+        if (!empty($response->getData())) {
+            if (is_array($response->getData())) {
+                foreach ($response->getData() as $key => $value) {
                     $this->attachData($key, $value);
                 }
             }
         }
 
-        return $actionData;
+        return $response;
     }
 
     public function _responseAction(string $type, array | null $data = [], string | null $namespace = null): Response | null
@@ -94,17 +94,17 @@ abstract class HighwayController extends Controller
             return null;
         }
 
-        $actionData = Action::run($action_class, $data ?? []);
+        $response = Action::build($action_class)->data($data ?? [])->run();
 
-        if (!empty($actionData->getData())) {
-            if (is_array($actionData->getData())) {
-                foreach ($actionData->getData() as $key => $value) {
+        if (!empty($response->getData())) {
+            if (is_array($response->getData())) {
+                foreach ($response->getData() as $key => $value) {
                     $this->attachData($key, $value);
                 }
             }
         }
 
-        return $actionData;
+        return $response;
     }
 
     private static function _shouldReturnAsResponse(mixed $value)
@@ -118,6 +118,10 @@ abstract class HighwayController extends Controller
         }
 
         if ($value instanceof \Illuminate\Http\Response) {
+            return true;
+        }
+
+        if ($value instanceof \Illuminate\Http\RedirectResponse) {
             return true;
         }
 

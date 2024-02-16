@@ -26,20 +26,6 @@ abstract class Highway
         return redirect()->secure(self::route($route, $parameters));
     }
 
-    public static function listable($model)
-    {
-        self::get($model, 'list', 'list');
-    }
-
-    public static function editable($model)
-    {
-        self::get($model, 'create', 'create');
-        self::post($model, 'store', 'store');
-        self::get($model, '{id}/edit', 'edit');
-        self::post($model, '{id}/update', 'update');
-        self::any($model, '{id}/destroy', 'destroy');
-    }
-
     public static function raw($page, string $path = '/', string $method = 'show')
     {
         self::_method($page, $path, $method, 'get', true);
@@ -84,12 +70,12 @@ abstract class Highway
 
         $context_name = static::get_class_name();
 
-        $class = $namespace . '\\Http\\Controllers\\' .$context_name . '\\'. $id . 'Controller';
+        $class = $namespace . '\\Http\\Controllers\\' . $context_name . '\\' . $id . 'Controller';
 
         if (!method_exists($class, $methodName)) {
             if ($routeType == 'get') {
                 Route::$routeType($path, function () use ($methodName, $namespace, $id, $routeName, $entity, $context_name) {
-                    return App::call($namespace . '\\Http\\Controllers\\' .$context_name . '\\'.  $id . 'Controller@view', [
+                    return App::call($namespace . '\\Http\\Controllers\\' . $context_name . '\\' .  $id . 'Controller@view', [
                         'entity' => $entity,
                         'type' => $methodName,
                         'namespace' => $namespace,
@@ -99,7 +85,7 @@ abstract class Highway
                 })->name($routeName);
             } else {
                 Route::$routeType($path, function () use ($methodName, $namespace, $id, $routeName, $entity, $context_name) {
-                    return App::call($namespace . '\\Http\\Controllers\\' .$context_name . '\\'.  $id . 'Controller@action', [
+                    return App::call($namespace . '\\Http\\Controllers\\' . $context_name . '\\' .  $id . 'Controller@action', [
                         'entity' => $entity,
                         'type' => $methodName,
                         'namespace' => $namespace,
@@ -109,7 +95,7 @@ abstract class Highway
                 })->name($routeName);
             }
         } else {
-            Route::$routeType($path, $namespace . '\\Http\\Controllers\\' . $context_name . '\\'. $id . 'Controller@' . $methodName)->name($routeName);
+            Route::$routeType($path, $namespace . '\\Http\\Controllers\\' . $context_name . '\\' . $id . 'Controller@' . $methodName)->name($routeName);
         }
     }
 
