@@ -23,7 +23,7 @@ abstract class Highway
 
     public static function redirect(string $route, array $parameters = [])
     {
-        return redirect()->secure(self::route($route, $parameters));
+        return redirect()->secure(static::route($route, $parameters));
     }
 
     public static function raw($page, string $path = '/', string $method = 'show')
